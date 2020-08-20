@@ -1,5 +1,5 @@
 import React from "react";
-import Renderer from "./components/renderer";
+import DragAndDrop from "./draggableUploader";
 import "./App.css";
 import "@blueprintjs/core";
 import "@blueprintjs/icons";
@@ -7,7 +7,7 @@ import "@blueprintjs/icons";
 function App() {
   return (
     <div className="App">
-      <Renderer />
+      <DragAndDrop />
     </div>
   );
 }

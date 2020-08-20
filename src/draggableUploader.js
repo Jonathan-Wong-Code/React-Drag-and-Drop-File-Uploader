@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { v4 as uuid } from "uuid";
-import { ProgressBar, Icon } from "@blueprintjs/core";
+
 export default function DraggableUploader() {
   const [loadedFiles, setLoadedFiles] = useState([]);
   let fileInput = useRef();
@@ -15,18 +15,11 @@ export default function DraggableUploader() {
     );
   };
 
-  const removeAllLoadedFiles = () => {
-    setLoadedFiles([]);
-  };
-
   let onFileLoad = (e) => {
-    console.log("hi");
     const file = e.currentTarget.files[0];
-    console.log(file);
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      console.log("IMAGE LOADED: ", fileReader.result);
       const newFile = {
         name: file.name,
         size: file.size,
@@ -36,7 +29,6 @@ export default function DraggableUploader() {
         id: uuid(),
       };
 
-      // Add File
       addLoadedFile(newFile);
     };
 
@@ -56,7 +48,7 @@ export default function DraggableUploader() {
       style={{ display: "flex", flexDirection: "column" }}
       className="inner-container"
     >
-      <div className="sub-header">Drag an Image</div>
+      <h1 className="sub-header">Drag an Image</h1>
       <div className="draggable-container">
         <input
           type="file"
@@ -77,14 +69,10 @@ export default function DraggableUploader() {
                 key={file.id}
                 onClick={() => {
                   removeLoadedFile(file);
-                  console.log("hello");
                 }}
               >
                 <img src={file.data} />
                 <div className="container">
-                  <span className="progress-bar">
-                    {file.isUploading && <ProgressBar />}
-                  </span>
                   <button
                     className="remove-btn"
                     onClick={() => removeLoadedFile(file)}
@@ -96,7 +84,7 @@ export default function DraggableUploader() {
             );
           })}
         </div>
-        <div className="helper-text">Drag and Drop Images Here</div>
+        <p className="helper-text">Drag and Drop Images Here</p>
         <div className="file-browser-container">
           <button onClick={() => fileInput.click()}>Browse</button>
         </div>
